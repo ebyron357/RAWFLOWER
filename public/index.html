@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RAWFLOWER</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0f1115;
+        --card: #191c24;
+        --accent: #e75480;
+        --text: #f5f5f7;
+        --muted: #9aa0ac;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(1200px 600px at 50% -10%, #22262f, var(--bg));
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 3rem 1rem;
+      }
+      main { width: 100%; max-width: 640px; }
+      h1 {
+        font-size: 2.4rem;
+        letter-spacing: 0.12em;
+        margin: 0 0 0.25rem;
+        background: linear-gradient(90deg, var(--accent), #f4c430);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      p.tag { color: var(--muted); margin-top: 0; }
+      form {
+        display: flex;
+        gap: 0.5rem;
+        margin: 1.5rem 0;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 0.7rem 0.9rem;
+        border-radius: 10px;
+        border: 1px solid #2b2f3a;
+        background: var(--card);
+        color: var(--text);
+        font-size: 1rem;
+      }
+      input[type="color"] {
+        width: 48px;
+        height: 44px;
+        border: none;
+        border-radius: 10px;
+        background: var(--card);
+        padding: 4px;
+      }
+      button {
+        padding: 0.7rem 1.1rem;
+        border: none;
+        border-radius: 10px;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button:hover { filter: brightness(1.08); }
+      ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
+      li {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        background: var(--card);
+        border: 1px solid #23272f;
+        border-radius: 12px;
+        padding: 0.8rem 1rem;
+      }
+      .dot { width: 16px; height: 16px; border-radius: 50%; flex: none; }
+      .name { font-weight: 600; }
+      .meta { color: var(--muted); font-size: 0.8rem; margin-left: auto; }
+      footer { margin-top: 2rem; color: var(--muted); font-size: 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>RAWFLOWER</h1>
+      <p class="tag">A tiny end-to-end demo running in the Cloud Agent environment.</p>
+
+      <form id="add-form">
+        <input id="name" type="text" placeholder="Add a flower…" autocomplete="off" required />
+        <input id="color" type="color" value="#e75480" title="Pick a color" />
+        <button type="submit">Plant</button>
+      </form>
+
+      <ul id="list"></ul>
+      <footer id="status">Loading…</footer>
+    </main>
+
+    <script>
+      const list = document.getElementById("list");
+      const status = document.getElementById("status");
+      const form = document.getElementById("add-form");
+
+      async function load() {
+        const res = await fetch("/api/flowers");
+        const flowers = await res.json();
+        list.innerHTML = "";
+        for (const f of flowers) {
+          const li = document.createElement("li");
+          li.innerHTML =
+            `<span class="dot" style="background:${f.color}"></span>` +
+            `<span class="name"></span>` +
+            `<span class="meta">#${f.id}</span>`;
+          li.querySelector(".name").textContent = f.name;
+          list.appendChild(li);
+        }
+        status.textContent = `${flowers.length} flower(s) in the garden.`;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const name = document.getElementById("name").value;
+        const color = document.getElementById("color").value;
+        const res = await fetch("/api/flowers", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ name, color }),
+        });
+        if (res.ok) {
+          document.getElementById("name").value = "";
+          await load();
+        } else {
+          const err = await res.json();
+          status.textContent = err.error ?? "Something went wrong.";
+        }
+      });
+
+      load();
+    </script>
+  </body>
+</html>
