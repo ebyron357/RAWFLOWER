@@ -3,141 +3,191 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RAWFLOWER</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-        --bg: #0f1115;
-        --card: #191c24;
-        --accent: #e75480;
-        --text: #f5f5f7;
-        --muted: #9aa0ac;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        background: radial-gradient(1200px 600px at 50% -10%, #22262f, var(--bg));
-        color: var(--text);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        padding: 3rem 1rem;
-      }
-      main { width: 100%; max-width: 640px; }
-      h1 {
-        font-size: 2.4rem;
-        letter-spacing: 0.12em;
-        margin: 0 0 0.25rem;
-        background: linear-gradient(90deg, var(--accent), #f4c430);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      p.tag { color: var(--muted); margin-top: 0; }
-      form {
-        display: flex;
-        gap: 0.5rem;
-        margin: 1.5rem 0;
-      }
-      input[type="text"] {
-        flex: 1;
-        padding: 0.7rem 0.9rem;
-        border-radius: 10px;
-        border: 1px solid #2b2f3a;
-        background: var(--card);
-        color: var(--text);
-        font-size: 1rem;
-      }
-      input[type="color"] {
-        width: 48px;
-        height: 44px;
-        border: none;
-        border-radius: 10px;
-        background: var(--card);
-        padding: 4px;
-      }
-      button {
-        padding: 0.7rem 1.1rem;
-        border: none;
-        border-radius: 10px;
-        background: var(--accent);
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      button:hover { filter: brightness(1.08); }
-      ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6rem; }
-      li {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        background: var(--card);
-        border: 1px solid #23272f;
-        border-radius: 12px;
-        padding: 0.8rem 1rem;
-      }
-      .dot { width: 16px; height: 16px; border-radius: 50%; flex: none; }
-      .name { font-weight: 600; }
-      .meta { color: var(--muted); font-size: 0.8rem; margin-left: auto; }
-      footer { margin-top: 2rem; color: var(--muted); font-size: 0.8rem; }
-    </style>
+    <title>RAW FLOWER — PREMIUM CBD-RICH HEMP FLOWER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Fira+Sans:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main>
-      <h1>RAWFLOWER</h1>
-      <p class="tag">A tiny end-to-end demo running in the Cloud Agent environment.</p>
+    <div class="rf-page">
+      <!-- 01 Header -->
+      <header class="rf-header">
+        <a class="rf-header__brand" href="#top">RAW FLOWER</a>
 
-      <form id="add-form">
-        <input id="name" type="text" placeholder="Add a flower…" autocomplete="off" required />
-        <input id="color" type="color" value="#e75480" title="Pick a color" />
-        <button type="submit">Plant</button>
-      </form>
+        <nav class="rf-nav" aria-label="Primary">
+          <a class="rf-nav__item" href="#drops">Shop Hemp</a>
+          <a class="rf-nav__item" href="#drops">Fresh Drops</a>
+          <a class="rf-nav__item" href="#brand-story">Ground Culture</a>
+          <a class="rf-nav__item" href="#discovery">Ask Raw</a>
+          <a class="rf-nav__item" href="#transparency">Transparency</a>
+          <a class="rf-nav__item" href="#wholesale">Wholesale</a>
+        </nav>
 
-      <ul id="list"></ul>
-      <footer id="status">Loading…</footer>
-    </main>
+        <button class="rf-button rf-button--cart" type="button">CART (2)</button>
+      </header>
 
-    <script>
-      const list = document.getElementById("list");
-      const status = document.getElementById("status");
-      const form = document.getElementById("add-form");
+      <main id="top">
+        <!-- 02 Hero -->
+        <section class="rf-hero" aria-labelledby="hero-heading">
+          <p class="rf-eyebrow rf-measure">
+            PREMIUM CBD-RICH HEMP FLOWER // FRESH HARVEST DROPS
+          </p>
+          <h1 class="rf-h1 rf-measure" id="hero-heading">RAW FLOWER</h1>
+          <p class="rf-hero__subhead rf-measure">PREMIUM CBD-RICH HEMP FLOWER</p>
+          <p class="rf-body rf-measure">
+            Curated CBD-rich craft hemp flower. Batch documentation and cannabinoid
+            profile information available when provided.
+          </p>
+          <div class="rf-hero__ctas">
+            <a class="rf-button rf-button--primary-large" href="#drops">SHOP HEMP FLOWER</a>
+            <a class="rf-button rf-button--secondary" href="#drops">EXPLORE FRESH DROPS</a>
+          </div>
+        </section>
 
-      async function load() {
-        const res = await fetch("/api/flowers");
-        const flowers = await res.json();
-        list.innerHTML = "";
-        for (const f of flowers) {
-          const li = document.createElement("li");
-          li.innerHTML =
-            `<span class="dot" style="background:${f.color}"></span>` +
-            `<span class="name"></span>` +
-            `<span class="meta">#${f.id}</span>`;
-          li.querySelector(".name").textContent = f.name;
-          list.appendChild(li);
-        }
-        status.textContent = `${flowers.length} flower(s) in the garden.`;
-      }
+        <!-- 03 Discovery -->
+        <section
+          class="rf-section rf-discovery"
+          id="discovery"
+          aria-labelledby="discovery-heading"
+        >
+          <h2 class="rf-discovery__title rf-measure" id="discovery-heading">
+            ASK RAW // HEMP DISCOVERY
+          </h2>
+          <p class="rf-eyebrow rf-measure">FIND YOUR AROMA &amp; TERPENE PROFILE</p>
 
-      form.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const color = document.getElementById("color").value;
-        const res = await fetch("/api/flowers", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ name, color }),
-        });
-        if (res.ok) {
-          document.getElementById("name").value = "";
-          await load();
-        } else {
-          const err = await res.json();
-          status.textContent = err.error ?? "Something went wrong.";
-        }
-      });
+          <div class="rf-search">
+            <label class="rf-search__label" for="discovery-input" hidden>
+              Describe terpene preferences or nose profiles
+            </label>
+            <input
+              class="rf-search__input"
+              id="discovery-input"
+              type="text"
+              autocomplete="off"
+              placeholder="Describe terpene preferences or nose profiles (e.g. gassy indica-lean, earthy profile, citrus notes)..."
+            />
+            <button class="rf-button rf-button--primary-compact" type="button">
+              DISCOVER
+            </button>
+          </div>
 
-      load();
-    </script>
+          <p class="rf-small-body rf-measure">
+            RECOMMENDED: Citrus Profile Myrcene-Forward Evening Profile Fresh Drops
+            Earthy Profile
+          </p>
+        </section>
+
+        <!-- 04 Current Hemp Drops -->
+        <section class="rf-section rf-drops" id="drops" aria-labelledby="drops-heading">
+          <h2 class="rf-h2 rf-measure" id="drops-heading">CURRENT HEMP DROPS</h2>
+          <p class="rf-eyebrow rf-measure">
+            CRAFT FLOWER LOTS // BATCH INFORMATION AVAILABLE WHEN PROVIDED
+          </p>
+
+          <div class="rf-card-grid">
+            <article class="rf-product-card">
+              <h3 class="rf-product-card__name">HASHBURGER</h3>
+              <p class="rf-product-card__notes">EARTHY • GAS • SAVORY</p>
+              <p class="rf-product-card__meta">
+                BATCH DETAILS • TERPENE PROFILE • COA WHEN AVAILABLE
+              </p>
+            </article>
+
+            <article class="rf-product-card">
+              <h3 class="rf-product-card__name">WEDDING CAKE</h3>
+              <p class="rf-product-card__notes">CREAMY • PEPPER • SWEET</p>
+              <p class="rf-product-card__meta">
+                BATCH DETAILS • TERPENE PROFILE • COA WHEN AVAILABLE
+              </p>
+            </article>
+
+            <article class="rf-product-card">
+              <h3 class="rf-product-card__name">PERMANENT MARKER</h3>
+              <p class="rf-product-card__notes">DANK • FLORAL • GAS</p>
+              <p class="rf-product-card__meta">
+                BATCH DETAILS • TERPENE PROFILE • COA WHEN AVAILABLE
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 05 Brand Story -->
+        <section
+          class="rf-section rf-story"
+          id="brand-story"
+          aria-labelledby="story-heading"
+        >
+          <h2 class="rf-h2 rf-measure" id="story-heading">COMMITTED TO THE FLOWER</h2>
+          <p class="rf-body rf-measure">
+            Ground Culture: small-batch farm origins, harvest context, curing detail,
+            tactile craft, and flower-first storytelling.
+          </p>
+          <p class="rf-story__after-dark rf-measure">AFTER DARK SESSIONS</p>
+          <p class="rf-story__after-dark-note rf-measure">COMMUNITY AROUND THE EMBER</p>
+        </section>
+
+        <!-- 06 Transparency -->
+        <section
+          class="rf-section rf-transparency"
+          id="transparency"
+          aria-labelledby="transparency-heading"
+        >
+          <h2 class="rf-h2 rf-measure" id="transparency-heading">
+            TRANSPARENCY // BATCH INFORMATION
+          </h2>
+
+          <div class="rf-transparency__columns">
+            <article class="rf-batch-item">
+              <h3 class="rf-batch-item__title">BATCH TESTING</h3>
+              <p class="rf-batch-item__body">Documentation shown when available</p>
+            </article>
+
+            <article class="rf-batch-item">
+              <h3 class="rf-batch-item__title">TERPENE PROFILES</h3>
+              <p class="rf-batch-item__body">Aroma and terpene detail</p>
+            </article>
+
+            <article class="rf-batch-item">
+              <h3 class="rf-batch-item__title">QUALITY SCREENING</h3>
+              <p class="rf-batch-item__body">Product-level quality context</p>
+            </article>
+
+            <article class="rf-batch-item">
+              <h3 class="rf-batch-item__title">BATCH DETAILS</h3>
+              <p class="rf-batch-item__body">Lot and harvest information</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 07 Wholesale -->
+        <section
+          class="rf-section rf-wholesale"
+          id="wholesale"
+          aria-labelledby="wholesale-heading"
+        >
+          <h2 class="rf-h3 rf-measure" id="wholesale-heading">
+            BULK FLOWER &amp; WHOLESALE SUPPLY
+          </h2>
+        </section>
+      </main>
+
+      <!-- 08 Footer -->
+      <footer class="rf-footer">
+        <p class="rf-footer__brand rf-measure">RAW FLOWER</p>
+        <p class="rf-eyebrow rf-measure">
+          GROUND CULTURE AFTER DARK // PREMIUM CRAFT HEMP &amp; CBD FLOWER
+        </p>
+        <p class="rf-small-body rf-footer__note rf-measure">
+          Editable reconstruction created from the Stitch ZIP source package. Source
+          states retained in the ZIP include approval candidate, factual-content
+          audited, brand-tone audited, premium ecommerce refined, and desktop homepage
+          variants.
+        </p>
+      </footer>
+    </div>
   </body>
 </html>
