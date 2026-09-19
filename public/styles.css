@@ -1,0 +1,619 @@
+/*
+ * RAW FLOWER homepage styles.
+ *
+ * Source of truth: Figma file "Raw Flower Ecommerce Platform — Stitch Import",
+ * page "RAW FLOWER — Stitch Import", frame "RAW FLOWER — Final Pre-Figma
+ * Cleaned & Audited" (node 1:2, 1440 x 2008).
+ *
+ * Desktop-first: base rules reproduce the 1440px frame exactly; max-width
+ * media queries adapt tablet and mobile without changing the design language.
+ */
+
+:root {
+  /* Raw Flower / Color */
+  --rf-background: #0d0f0b;
+  --rf-elevated: #121410;
+  --rf-text-primary: #e8e0cf;
+  --rf-text-secondary: #c8c7b8;
+  --rf-accent-olive: #4b5320;
+  --rf-accent-rust: #c46332;
+  --rf-accent-sand: #c6b38e;
+  --rf-divider: #2a2d26;
+  --rf-secondary-surface: #1a1c18;
+  --rf-input-border: #47483c;
+
+  /* Raw Flower / Typography */
+  --rf-font-display: "Barlow Condensed", "Arial Narrow", Impact, sans-serif;
+  --rf-font-body: "Fira Sans", ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --rf-tracking-wide: 0.02em;
+  --rf-tracking-label: 0.08em;
+
+  /* Layout */
+  --rf-frame-width: 1440px;
+  --rf-gutter: 48px;
+  --rf-measure: 760px;
+  --rf-section-pad-y: 32px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--rf-background);
+  color: var(--rf-text-secondary);
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+}
+
+.rf-page {
+  width: 100%;
+  max-width: var(--rf-frame-width);
+  margin: 0 auto;
+  background: var(--rf-background);
+}
+
+/* Text blocks in the frame are a fixed 760px measure. */
+.rf-measure {
+  width: 100%;
+  max-width: var(--rf-measure);
+  margin: 0;
+}
+
+/* ---------- Shared type styles ---------- */
+
+.rf-eyebrow {
+  font-family: var(--rf-font-body);
+  font-weight: 500;
+  font-size: 11px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-label);
+  text-transform: uppercase;
+  color: var(--rf-accent-sand);
+}
+
+.rf-h1 {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 0.95;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-h2 {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-h3 {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-body {
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--rf-text-secondary);
+}
+
+.rf-small-body {
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--rf-text-secondary);
+}
+
+/* ---------- Buttons ---------- */
+
+.rf-button {
+  display: inline-flex;
+  align-items: flex-start;
+  border: 0;
+  border-radius: 0;
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+  background: var(--rf-accent-olive);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rf-button--primary-large {
+  padding: 14px 24px;
+}
+
+.rf-button--primary-compact {
+  padding: 12px 20px;
+}
+
+.rf-button--secondary {
+  padding: 14px 24px;
+  background: var(--rf-secondary-surface);
+  border: 1px solid var(--rf-accent-olive);
+}
+
+.rf-button--cart {
+  padding: 10px 16px;
+}
+
+.rf-button:hover {
+  filter: brightness(1.12);
+}
+
+.rf-button:focus-visible {
+  outline: 2px solid var(--rf-accent-sand);
+  outline-offset: 2px;
+}
+
+/* ---------- 01 Header ---------- */
+
+.rf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88px;
+  padding: 16px var(--rf-gutter);
+  background: var(--rf-background);
+  border-bottom: 1px solid var(--rf-divider);
+}
+
+.rf-header__brand {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rf-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.rf-nav__item {
+  font-family: var(--rf-font-body);
+  font-weight: 500;
+  font-size: 13px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rf-nav__item:hover,
+.rf-nav__item:focus-visible {
+  color: var(--rf-text-primary);
+}
+
+/* ---------- Sections ---------- */
+
+.rf-section {
+  padding: var(--rf-section-pad-y) var(--rf-gutter);
+  background: var(--rf-background);
+}
+
+/* ---------- 02 Hero ---------- */
+
+.rf-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 72px var(--rf-gutter);
+  background: var(--rf-background);
+}
+
+.rf-hero__subhead {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-accent-rust);
+  opacity: 0.9;
+}
+
+.rf-hero__ctas {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* ---------- 03 Discovery ---------- */
+
+.rf-discovery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rf-discovery__title {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: var(--rf-measure);
+  /*
+   * Figma draws the stroke inside the 760x70 frame, so the 1px border is
+   * subtracted from the 16px/12px padding to keep the box exactly 70px tall.
+   */
+  padding: 11px 11px 11px 15px;
+  background: var(--rf-elevated);
+  border: 1px solid var(--rf-input-border);
+}
+
+.rf-search__input {
+  flex: 1 0 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--rf-text-primary);
+}
+
+.rf-search__input::placeholder {
+  color: var(--rf-text-secondary);
+  opacity: 0.75;
+}
+
+.rf-search__input:focus {
+  outline: none;
+}
+
+.rf-search:focus-within {
+  border-color: var(--rf-accent-olive);
+}
+
+/* ---------- 04 Current Hemp Drops ---------- */
+
+.rf-drops {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rf-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 416px);
+  justify-content: start;
+  gap: 16px;
+  width: 100%;
+}
+
+.rf-product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 240px;
+  padding: 20px;
+  background: var(--rf-elevated);
+  border: 1px solid var(--rf-accent-olive);
+}
+
+.rf-product-card__name {
+  margin: 0;
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-product-card__notes {
+  margin: 0;
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--rf-accent-rust);
+  opacity: 0.95;
+}
+
+.rf-product-card__meta {
+  margin: 0;
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--rf-text-secondary);
+  opacity: 0.85;
+}
+
+/* ---------- 05 Brand Story ---------- */
+
+.rf-story {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rf-story__after-dark {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-accent-rust);
+}
+
+.rf-story__after-dark-note {
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--rf-accent-sand);
+}
+
+/* ---------- 06 Transparency ---------- */
+
+.rf-transparency {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.rf-transparency__columns {
+  display: grid;
+  grid-template-columns: repeat(4, 318px);
+  justify-content: start;
+  gap: 12px;
+  width: 100%;
+}
+
+.rf-batch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 130px;
+  padding: 16px;
+  background: var(--rf-elevated);
+  border: 1px solid var(--rf-divider);
+}
+
+.rf-batch-item__title {
+  margin: 0;
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-batch-item__body {
+  margin: 0;
+  font-family: var(--rf-font-body);
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--rf-text-secondary);
+  opacity: 0.85;
+}
+
+/* ---------- 07 Wholesale ---------- */
+
+.rf-wholesale {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ---------- 08 Footer ---------- */
+
+.rf-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: var(--rf-section-pad-y) var(--rf-gutter);
+  background: var(--rf-background);
+}
+
+.rf-footer__brand {
+  font-family: var(--rf-font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: normal;
+  letter-spacing: var(--rf-tracking-wide);
+  color: var(--rf-text-primary);
+}
+
+.rf-footer__note {
+  opacity: 0.75;
+}
+
+/* =========================================================
+   Tablet — approx 1024px and 768px
+   Keeps the dark Raw Flower identity, tightens the gutter and
+   lets the fixed card tracks become fluid so nothing overflows.
+   ========================================================= */
+
+@media (max-width: 1199px) {
+  :root {
+    --rf-gutter: 32px;
+  }
+
+  .rf-card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  /* Two even rows rather than an auto-fit 3 + 1 orphan. */
+  .rf-transparency__columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1023px) {
+  .rf-hero {
+    padding: 56px var(--rf-gutter);
+  }
+
+  .rf-h1 {
+    font-size: 64px;
+  }
+
+  .rf-nav {
+    gap: 18px;
+  }
+}
+
+/* Header stacks before the nav row can collide with the cart button. */
+@media (max-width: 899px) {
+  .rf-header {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    padding: 16px var(--rf-gutter);
+  }
+
+  .rf-nav {
+    order: 3;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+}
+
+/* =========================================================
+   Mobile — approx 430px and 375px
+   ========================================================= */
+
+@media (max-width: 767px) {
+  :root {
+    --rf-gutter: 20px;
+    --rf-section-pad-y: 28px;
+  }
+
+  .rf-header__brand,
+  .rf-footer__brand {
+    font-size: 24px;
+  }
+
+  .rf-hero {
+    padding: 40px var(--rf-gutter);
+    gap: 16px;
+  }
+
+  .rf-h1 {
+    font-size: 48px;
+  }
+
+  .rf-hero__subhead {
+    font-size: 22px;
+  }
+
+  .rf-body {
+    font-size: 17px;
+  }
+
+  .rf-h2 {
+    font-size: 32px;
+  }
+
+  .rf-h3,
+  .rf-story__after-dark {
+    font-size: 25px;
+  }
+
+  /* Full-width tap targets so the CTAs stay usable. */
+  .rf-hero__ctas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .rf-hero__ctas .rf-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .rf-search {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .rf-search__input {
+    flex: none;
+    width: 100%;
+  }
+
+  .rf-search .rf-button {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .rf-card-grid,
+  .rf-transparency__columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rf-product-card {
+    min-height: 0;
+  }
+
+  .rf-product-card__name {
+    font-size: 30px;
+  }
+
+  .rf-batch-item {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .rf-h1 {
+    font-size: 42px;
+  }
+
+  .rf-nav {
+    gap: 10px 14px;
+  }
+}

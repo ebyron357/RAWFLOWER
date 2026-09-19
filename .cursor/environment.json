@@ -1,0 +1,17 @@
+{
+  "name": "RAWFLOWER",
+  "install": "pnpm install --frozen-lockfile",
+  "terminals": [
+    {
+      "name": "dev-server",
+      "command": "pnpm dev",
+      "description": "RAWFLOWER dev server (tsx watch) on http://0.0.0.0:3000. Restart here to pick up changes; logs are visible in this terminal."
+    }
+  ],
+  "ports": [
+    {
+      "name": "web",
+      "port": 3000
+    }
+  ]
+}
